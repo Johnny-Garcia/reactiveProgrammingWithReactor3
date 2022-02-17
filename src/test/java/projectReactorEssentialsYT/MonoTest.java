@@ -1,11 +1,13 @@
 package projectReactorEssentialsYT;
 
-import org.junit.Test;
 import lombok.extern.slf4j.Slf4j;
+import org.junit.jupiter.api.Test;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 import reactor.test.StepVerifier;
 
+import java.time.Duration;
+import java.time.temporal.TemporalUnit;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -40,9 +42,12 @@ public class MonoTest {
         mono.subscribe(s -> log.info("Valor subscrito: {}", s));
 
         // Não funciona
-//        StepVerifier.create(mono)
-//                .expectNext(name)
-//                .verifyComplete();
+        StepVerifier.create(mono)
+                .expectSubscription()
+                .expectNext(name)
+                .expectNextCount(10)
+                .thenAwait(Duration.ofSeconds(1))
+                .verifyComplete();
 
     }
 

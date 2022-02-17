@@ -6,7 +6,10 @@ import java.util.*;
 import java.time.*;
 
 import lombok.extern.slf4j.Slf4j;
+import model.User;
 import reactor.core.publisher.Flux;
+import reactor.core.scheduler.Scheduler;
+import reactor.core.scheduler.Schedulers;
 
 /**
  * Learn how to create Flux instances.
@@ -24,6 +27,7 @@ public class Part01Flux {
         log.info("Teste de fluxo: {}", fooBarFluxFromList());
         log.info("Teste de fluxo: {}", errorFlux());
         log.info("Teste de fluxo: {}", counter());
+
     }
 
 
@@ -33,7 +37,6 @@ public class Part01Flux {
     static Flux<String> emptyFlux() {
         Flux<String> fluxEmpty = Flux
                 .just();
-        fluxEmpty.subscribe();
         return fluxEmpty;
     }
 
